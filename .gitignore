@@ -1,0 +1,7 @@
+.godot/
+builds/
+FRAC.EXE
+MANDEL.PIC
+file_id.diz
+README
+analysis/frac_recursive_disassembly.asm
