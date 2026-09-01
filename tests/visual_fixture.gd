@@ -20,7 +20,7 @@ func _ready() -> void:
 	active_orientations = PieceCatalog.get_orientations(active_size)
 	active_orientation_index = 0
 	active_cells = active_orientations[active_orientation_index].duplicate()
-	active_position = _far_spawn_position(active_cells)
+	active_position = Vector3i(1, board_height - 1, 2)
 	queue_redraw()
 
 

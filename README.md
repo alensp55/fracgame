@@ -11,6 +11,7 @@ not included.
 - Original nine solid piece types and their recovered selection weights.
 - Keyboard and numeric-keypad movement, including diagonals.
 - Single-button cyclic rotation.
+- Active-piece projections on both far walls, without a floor shadow.
 - Recovered DOS fall speeds, level timing, bonus table and scoring rules.
 - Configurable glass dimensions, starting level, starting layers and available pieces.
 - Local top-ten leaderboard.

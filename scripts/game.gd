@@ -540,6 +540,7 @@ func _draw() -> void:
 		_draw_leaderboard()
 		return
 	_draw_hud()
+	_draw_wall_shadows()
 	_draw_board_grid()
 	_draw_board_outline()
 	_draw_all_cubes()
@@ -675,6 +676,42 @@ func _draw_board_grid() -> void:
 		)
 		draw_line(_project(Vector3(0, y, 0)), _project(Vector3(0, y, board_depth)), grid_color, 1.0)
 	draw_line(_project(Vector3.ZERO), _project(Vector3(0, board_height, 0)), strong_color, 2.0)
+
+
+func _draw_wall_shadows() -> void:
+	if game_over or active_cells.is_empty():
+		return
+	var world_cells := _world_cells(active_cells, active_position)
+	var shadows := wall_shadow_cells(world_cells)
+	var shadow_color := Color(0.56, 0.52, 0.78, 0.72)
+	for coordinate_value in shadows["wall_z"]:
+		var coordinate: Vector2i = coordinate_value
+		var wall_z := PackedVector2Array([
+			_project(Vector3(coordinate.x, coordinate.y, 0)),
+			_project(Vector3(coordinate.x + 1, coordinate.y, 0)),
+			_project(Vector3(coordinate.x + 1, coordinate.y + 1, 0)),
+			_project(Vector3(coordinate.x, coordinate.y + 1, 0)),
+		])
+		draw_colored_polygon(wall_z, shadow_color)
+	for coordinate_value in shadows["wall_x"]:
+		var coordinate: Vector2i = coordinate_value
+		var wall_x := PackedVector2Array([
+			_project(Vector3(0, coordinate.y, coordinate.x)),
+			_project(Vector3(0, coordinate.y, coordinate.x + 1)),
+			_project(Vector3(0, coordinate.y + 1, coordinate.x + 1)),
+			_project(Vector3(0, coordinate.y + 1, coordinate.x)),
+		])
+		draw_colored_polygon(wall_x, shadow_color)
+
+
+static func wall_shadow_cells(world_cells: Array) -> Dictionary:
+	var wall_x := {}
+	var wall_z := {}
+	for cell_value in world_cells:
+		var cell: Vector3i = cell_value
+		wall_x[Vector2i(cell.z, cell.y)] = true
+		wall_z[Vector2i(cell.x, cell.y)] = true
+	return {"wall_x": wall_x, "wall_z": wall_z}
 
 
 func _draw_board_outline() -> void:

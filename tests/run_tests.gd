@@ -14,6 +14,7 @@ func _init() -> void:
 	_test_original_piece_catalog()
 	_test_single_button_orientations()
 	_test_far_corner_spawn()
+	_test_wall_shadows()
 	_test_arrow_directions()
 	_test_numpad_directions()
 	_test_original_letter_directions()
@@ -132,6 +133,16 @@ func _test_far_corner_spawn() -> void:
 	var spawn_position: Vector3i = game._far_spawn_position(vertical_piece)
 	_expect(spawn_position == Vector3i(0, 8, 0), "a tall piece spawns fully inside the far corner")
 	game.free()
+
+
+func _test_wall_shadows() -> void:
+	var cells := [Vector3i(1, 8, 2), Vector3i(1, 8, 3), Vector3i(2, 8, 3)]
+	var shadows := GameClass.wall_shadow_cells(cells)
+	_expect(shadows["wall_z"].size() == 2, "the active piece projects once per occupied Z-wall cell")
+	_expect(shadows["wall_x"].size() == 2, "the active piece projects once per occupied X-wall cell")
+	_expect(shadows["wall_z"].has(Vector2i(1, 8)), "the Z-wall shadow preserves X and height")
+	_expect(shadows["wall_x"].has(Vector2i(3, 8)), "the X-wall shadow preserves Z and height")
+	_expect(not shadows.has("floor"), "wall projection does not restore the removed floor shadow")
 
 
 func _test_diagonal_slide() -> void:
