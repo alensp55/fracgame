@@ -1,3 +1,5 @@
+**English** | [Русский](README.ru.md)
+
 # fracgame
 
 `fracgame` is a clean-room Godot recreation of the 1990 DOS puzzle game FRAC. Solid 3D pieces fall into a 5×5×12
