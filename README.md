@@ -2,48 +2,39 @@
 
 # fracgame
 
-`fracgame` is a clean-room Godot recreation of the 1990 DOS puzzle game FRAC. Solid 3D pieces fall into a 5×5×12
-glass, completed horizontal layers disappear, and everything above them drops down.
-
-The repository contains only the new implementation. The original DOS executable, artwork and other game files are
-not included.
+Clean-room Godot recreation of the 1990 DOS puzzle game FRAC. 3D pieces fall into a 5×5×12 glass; completed layers
+disappear.
 
 ## Features
 
-- Original nine solid piece types and their recovered selection weights.
-- Keyboard and numeric-keypad movement, including diagonals.
-- Single-button cyclic rotation.
-- Active-piece projections on both far walls, without a floor shadow.
-- Recovered DOS fall speeds, level timing, bonus table and scoring rules.
-- Configurable glass dimensions, starting level, starting layers and available pieces.
-- Local top-ten leaderboard.
+- nine piece types;
+- keyboard and numeric-keypad controls;
+- cyclic rotation and hard drop;
+- wall projections;
+- configurable glass, level and starting layers;
+- local top-ten leaderboard.
 
 ## Controls
 
-- Arrow keys or `QWE` / `AD` / `ZXC`: move a piece.
-- Numeric keypad `1`–`9`: move in eight directions; `5` rotates.
-- `S`: rotate.
-- `Space`, `Insert`, `Delete`, keypad `0` or decimal point: hard drop.
-- `Enter`: increase the speed level.
+- arrows or `QWE` / `AD` / `ZXC`: move;
+- keypad `1`–`9`: move, `5`: rotate;
+- `S`: rotate;
+- `Space`, `Insert`, `Delete` or keypad `0`: hard drop;
+- `Enter`: increase speed;
 - `P` or `Escape`: pause.
 
-## Run from source
+## Run and test
 
-Open `project.godot` with Godot 4.7 or newer.
-
-Run the automated tests:
+Open `project.godot` with Godot 4.7+.
 
 ```powershell
-& "C:\path\to\Godot_console.exe" --headless --path . --script res://tests/run_tests.gd
+& "C:\path\Godot_console.exe" --headless --path . --script res://tests/run_tests.gd
 ```
 
-The current Windows build helper expects Godot 4.7.2 in `C:\path\Godot`:
+Windows build:
 
 ```powershell
-.\build_windows.ps1
+.\build_windows.ps1 -GodotConsole "C:\path\Godot_console.exe" -GodotRuntime "C:\path\Godot.exe"
 ```
 
-## License
-
-The new implementation is available under the MIT License. FRAC and any original assets belong to their respective
-copyright holders and are not distributed here.
+MIT License. Original FRAC files and assets are not included.
